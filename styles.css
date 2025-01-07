@@ -78,12 +78,15 @@ body {
 
 
 letter{
+    display: inline-block;
     margin-right: 0.2rem;
     font-size: 2rem;
 }
 
 word{
-    
+    display: inline-block;
+    margin-right:1rem;
+    margin-bottom:1rem;
 }
 
 .extra{
@@ -98,4 +101,8 @@ word{
 
 .incorrect{
     color:#E44545;
+}
+
+.cursor {
+    text-decoration: underline;
 }
