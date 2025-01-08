@@ -6,12 +6,27 @@
     
     <title>Real Time Typing Environment</title>
     
-    <link rel="icon" href="https://picsum.photos/200" type="image/x-icon">
+    <link rel="icon" href="logo.png" type="image/x-icon">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div id="enter_name_container" class = "enter_name_container">
+        <entername>Enter Name eg.(John Doe)</entername>
+        <div id="enter_name_child_container">
+            <input type="text" id="name_input" placeholder="Enter your name" />
+            <button id="submit_button" onclick="handle_name_submit()">Begin session</button>
+        </div>
+    </div>
+    <div class="navbar">
+        <div id="#logo"><img class = "logo" src = "logo.png"></div>
+        <div class = "title_container">
+            <maintitle>REAL TIME TYPING ENVIRONMENT</maintitle>
+            <subtitle>Sardar Patel Institute of Technology</subtitle>
+        </div>
+        <div></div>
+    </div>
     <div id = "progress_typing_container">
         <div id="informatic"></div>
         <div id = "progress"></div>
