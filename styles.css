@@ -178,7 +178,7 @@ subtitle{
 #out_of_focus_warning {
     color:white;
     font-size: 1.5rem;
-    opacity: 0%;
+    opacity: 100%;
     min-width:500px;
 }
 
@@ -214,4 +214,40 @@ word{
     background-color: #ffffff17;
     color:rgba(255, 255, 255, 0.449);
     border-radius:5px;
+}
+
+#thank_you_page{
+    position: absolute;
+
+    width:100%;
+    height:100%;
+
+    top:50%;
+    left:50%;
+    transform: translateX(-50%) translateY(-50%);
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+
+    z-index: 1;
+
+    background-color: #0E0E0E;
+
+    opacity:0%;
+    pointer-events:none;
+}
+
+thankyou{
+    font-size: 2rem;
+    margin-bottom:2rem;
+    color : #ffffff;
+}
+
+closepage{
+    color: #282828;
+    font-size: 2rem;
 }

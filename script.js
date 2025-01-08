@@ -4,12 +4,37 @@ let typing_area = document.getElementById("typing_area")
 let out_of_focus_warning = document.getElementById("out_of_focus_warning")
 let enter_name_container = document.getElementById("enter_name_container")
 let name_input = document.getElementById("name_input")
+let thank_you_page = document.getElementById("thank_you_page")
 
 const paragraph = "  The sun dipped below the horizon, painting the sky in hues of orange and pink, as a gentle breeze rustled through the trees. Birds chirped their evening songs, signaling the close of another day. Children laughed and played in the distance, their joyful voices carrying through the air. A lone cyclist pedaled down the quiet street, the hum of tires on asphalt blending with the sounds of the settling world. The aroma of freshly baked bread wafted from a nearby home, inviting thoughts of warmth and comfort. In that moment, time seemed to slow, offering a brief respite from the rush of life."
 // paragraph shall only be alphabetical and space in nature, no punctuations and no numbers
 
 let current_length = 0;
 let total_length = 0;
+
+let data = []
+
+typing_area.addEventListener("keydown", event=>{
+    const charCode = event.key.charCodeAt(0);
+    if((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode === 32){
+        data.push({
+            event:"keydown",
+            key:event.key,
+            timestamp:performance.now()
+        })
+    }
+})
+
+typing_area.addEventListener("keyup", event=>{
+    const charCode = event.key.charCodeAt(0);
+    if((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode === 32){
+        data.push({
+            event:"keyup",
+            key:event.key,
+            timestamp:performance.now()
+        })
+    }
+})
 
 function preprocess_paragraph_into_dom(paragraph, parent){
     let words = paragraph.trim().toLowerCase().split(" ")
@@ -36,17 +61,13 @@ function preprocess_paragraph_into_dom(paragraph, parent){
 preprocess_paragraph_into_dom(paragraph,typing_area)
 
 progress.textContent = current_length+"/"+total_length
-informatic.textContent = "No rush! This is not a speed test. Type naturally with minimal distractions. This will be used for research purposes."
+informatic.textContent = "No rush! This is not a speed test. Type naturally with minimal distractions. This will be used for research purposes. On completing last word, press [SPACE]"
 document.getElementById("out_of_focus_warning").innerHTML = 
     '<i class="fa-solid fa-triangle-exclamation"></i> click on paragraph to focus';
 
 let current_word_element = typing_area.firstChild
 let current_letter_element = current_word_element.firstChild
 current_letter_element.classList.add("cursor")
-
-typing_area.addEventListener("keydown", event=>{
-    // console.log(event.key, performance.now(), "clean")
-})
 
 typing_area.addEventListener("keydown", handle_keydown)
 
@@ -115,7 +136,7 @@ function handle_name_submit(){
     if(username.length > 0){
         enter_name_container.style.opacity = "0%"
         enter_name_container.style.pointerEvents = "none"
-        typing_area.focus()
+        // typing_area.focus()
     }
     else{
         window.alert("Name cannot be empty")
@@ -124,6 +145,9 @@ function handle_name_submit(){
 
 function handle_end_of_paragraph(){
     console.log("reached end of paragraph")
+    thank_you_page.style.opacity = "100%"
+    thank_you_page.style.pointerEvents = "auto"
+    console.log(data)
 }
 
 //we need to use pointer approach... 

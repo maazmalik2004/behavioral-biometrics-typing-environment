@@ -9,7 +9,7 @@ let total_length = paragraph.replace(" ","").length
 let current_length = 0;
 progress.textContent = current_length+"/"+total_length
 
-informatic.textContent = "No rush! This is not a speed test. Type naturally with minimal distractions. This will be used for research purposes."
+informatic.textContent = "No rush! This is not a speed test. Type naturally with minimal distractions. This will be used for research purposes. On completing last word, press [SPACE]"
 
 typing_area.focus()
 
