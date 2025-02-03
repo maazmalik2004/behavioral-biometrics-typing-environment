@@ -152,10 +152,14 @@ function handle_end_of_paragraph() {
     thank_you_page.style.pointerEvents = "auto"
     console.log(data); //raw unprocessed data
     results = processEventsWithSlidingWindow(data, 100, 25);//define window size and overlap here
-    console.log(results); //results is an array of objects
+    console.log(results);
+    sendResultsToServer(results) //results is an array of objects
 }
 
 function sendResultsToServer(results) {
+    console.log("Enter")
+    console.log("Yo: ",JSON.stringify({ results: results }))
+    console.log("Hi")
     fetch("http://localhost:5000/save-results", { //temporary server
         method: "POST",
         headers: {
