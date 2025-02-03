@@ -1,7 +1,6 @@
 function calculateAndStoreDelays(events) {
-    let arr = new Array(53).fill(null);
+    let arr = new Array(26).fill(null);
 
-    const charCodeA = 'A'.charCodeAt(0);
     const charCodea = 'a'.charCodeAt(0);
 
     let delays = {};
@@ -32,12 +31,10 @@ function calculateAndStoreDelays(events) {
 
         if (keyDelays.length > 0) {
             let index;
-            if (key === ' ') {
-                index = 52; // space character index
-            } else if (key >= 'a' && key <= 'z') {
+            if (key >= 'a' && key <= 'z') {
                 index = key.charCodeAt(0) - charCodea;
-            } else if (key >= 'A' && key <= 'Z') {
-                index = 26 + (key.charCodeAt(0) - charCodeA);
+            } else {
+                index = undefined; // Ignore non-lowercase characters
             }
 
             if (index !== undefined) {
@@ -78,10 +75,9 @@ function calculateAndStoreDelays(events) {
 
 
 function calculateAndStoreInterkeyDelays(events) {
-    const size = 53;
+    const size = 26;
     let arr = Array.from({ length: size }, () => Array.from({ length: size }, () => [null, null, null, null]));
 
-    const charCodeA = 'A'.charCodeAt(0);
     const charCodea = 'a'.charCodeAt(0);
 
     let downDelays = {};
@@ -98,12 +94,10 @@ function calculateAndStoreInterkeyDelays(events) {
 
     events.forEach(event => {
         let index;
-        if (event.key === ' ') {
-            index = 52; // space character index
-        } else if (event.key >= 'a' && event.key <= 'z') {
+        if (event.key >= 'a' && event.key <= 'z') {
             index = event.key.charCodeAt(0) - charCodea;
-        } else if (event.key >= 'A' && event.key <= 'Z') {
-            index = 26 + (event.key.charCodeAt(0) - charCodeA);
+        } else {
+            index = undefined;
         }
 
         if (index !== undefined) {
