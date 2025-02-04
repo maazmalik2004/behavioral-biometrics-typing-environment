@@ -8,3 +8,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'age', 'working', 'sex')
     search_fields = ('name', 'email')
     list_filter = ('working', 'sex')
+    
