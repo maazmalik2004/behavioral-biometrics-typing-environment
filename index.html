@@ -15,12 +15,44 @@
 
 <body>
     <div id="enter_name_container" class="enter_name_container">
-        <entername>Enter Name eg.(John Doe)</entername>
+        <entername>Please fill in the following details</entername>
         <div id="enter_name_child_container">
             <input type="text" id="name_input" placeholder="Enter your name" />
+
+            <label for="gender_input">Gender:</label>
+            <select id="gender_input" required>
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select><br><br>
+
+            <label for="employed_input">Employment Status:</label>
+            <select id="employed_input" required>
+                <option value="">Select</option>
+                <option value="employed">Employed</option>
+                <option value="unemployed">Unemployed</option>
+                <option value="student">Student</option>
+                <option value="other">Other</option>
+            </select><br><br>
+
+            <label for="age_input">Age:</label>
+            <input type="number" id="age_input" placeholder="Enter your age" min="1" required><br><br>
+
+
             <button id="submit_button" onclick="handle_name_submit()">Begin session</button>
         </div>
     </div>
+
+    <div id="question_container" class="enter_name_container" style="display: none;">
+        <entername>Answer the following question:</entername>
+        <div id="question_child_container">
+            <p id="the_question">What is your favorite color?</p>
+            <input type="text" id="answer_input" placeholder="Enter your answer" required><br><br>
+            <button id="submit_question_button" onclick="handle_question_submit()">Submit Answer</button>
+        </div>
+    </div>
+
     <div class="navbar">
         <div id="#logo"><img class="logo" src="logo.png"></div>
         <div class="title_container">

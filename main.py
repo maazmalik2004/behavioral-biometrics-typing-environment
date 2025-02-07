@@ -94,7 +94,7 @@ def main():
     session_vectors = []  # List to store vectors for each session
 
     with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
-        for i in range(10):  # 10 typing sessions (paragraphs)
+        for i in range(1):  # 10 typing sessions (paragraphs)
             input(f"\nType paragraph {i + 1} and press Enter when done: ")
 
             # Generate a vector for the current session after typing

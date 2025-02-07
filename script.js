@@ -5,6 +5,9 @@ let out_of_focus_warning = document.getElementById("out_of_focus_warning")
 let enter_name_container = document.getElementById("enter_name_container")
 let name_input = document.getElementById("name_input")
 let thank_you_page = document.getElementById("thank_you_page")
+let think_typing_container = document.getElementById("think_typing_container")
+let question = document.getElementById("question")
+let thinking_typing_area = document.getElementById("thinking_typing_area")
 
 const paragraph = "  The sun dipped below the horizon"
 // , painting the sky in hues of orange and pink, as a gentle breeze rustled through the trees. Birds chirped their evening songs, signaling the close of another day. Children laughed and played in the distance, their joyful voices carrying through the air. A lone cyclist pedaled down the quiet street, the hum of tires on asphalt blending with the sounds of the settling world. The aroma of freshly baked bread wafted from a nearby home, inviting thoughts of warmth and comfort. In that moment, time seemed to slow, offering a brief respite from the rush of life."
@@ -136,8 +139,10 @@ let username = ""
 function handle_name_submit() {
     username = name_input.value
     if (username.length > 0) {
-        enter_name_container.style.opacity = "0%"
-        enter_name_container.style.pointerEvents = "none"
+        // enter_name_container.style.opacity = "0%"
+        // enter_name_container.style.pointerEvents = "none"
+        document.getElementById('enter_name_container').style.display = 'none';
+        document.getElementById('question_container').style.display = 'block';
         // typing_area.focus()
     }
     else {
@@ -145,36 +150,87 @@ function handle_name_submit() {
     }
 }
 
-let results = [];
-function handle_end_of_paragraph() {
-    console.log("reached end of paragraph")
-    thank_you_page.style.opacity = "100%"
-    thank_you_page.style.pointerEvents = "auto"
-    console.log(data); //raw unprocessed data
-    results = processEventsWithSlidingWindow(data, 100, 25);//define window size and overlap here
-    console.log(results);
-    sendResultsToServer(results) //results is an array of objects
+function handle_question_submit() {
+    const answer = document.getElementById('answer_input').value;
+
+    if (!answer) {
+        alert("Please enter an answer.");
+        return;
+    }
+
+    console.log("Answer:", answer);
+
+    document.getElementById('progress_typing_container').style.display = 'block';
+    document.getElementById('question_container').style.display = 'none';
+    // enter_name_container.style.opacity = "0%"
+    // enter_name_container.style.pointerEvents = "none"
+    // progress_typing_container.style.opacity = "100%"
+
 }
 
-function sendResultsToServer(results) {
-    console.log("Enter")
-    console.log("Yo: ",JSON.stringify({ results: results }))
-    console.log("Hi")
-    fetch("http://localhost:5000/save-results", { //temporary server
+let results = [];
+function handle_end_of_paragraph() {
+    console.log("reached end of paragraph");
+    thank_you_page.style.opacity = "100%";
+    thank_you_page.style.pointerEvents = "auto";
+    console.log(data); //raw unprocessed data
+    results = processEventsWithSlidingWindow(data, 100, 25); //define window size and overlap here
+    console.log(results);
+
+    // Frontend endpoint to send the processed data
+    const endpoint = "http://localhost:8000/keystroke/"; // Replace with your actual endpoint
+
+    // Prepare the data to be sent in the POST request
+    const postData = {
+        email_id: "test@example.com", // Replace with the actual email or make it dynamic
+        type: 1, //  You might want to make these dynamic as well
+        instance: 1, //  You might want to make these dynamic as well
+        keystrokes: results // Use the processed 'results' here
+    };
+
+    // Send the POST request using fetch API
+    fetch(endpoint, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json" // Important: Set the content type to JSON
         },
-        body: JSON.stringify({ results: results }),
+        body: JSON.stringify(postData) // Convert the data to JSON string
     })
-        .then(response => response.json())
-        .then(data => {
-            console.log("Results saved:", data);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // Or response.text() if the server returns plain text
+        })
+        .then(responseData => {
+            console.log("Success:", responseData); // Handle the successful response from the server
+            // You might want to do something with the response, like displaying a message
         })
         .catch(error => {
-            console.error("Error sending results:", error);
+            console.error("Error:", error); // Handle errors during the fetch request
+            // You might want to display an error message to the user
         });
 }
+
+// function sendResultsToServer(results) {
+
+//     console.log("Yo: ", JSON.stringify({ results: results }))
+
+//     fetch("http://localhost:5000/save-results", { //temporary server
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({ results: results }),
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             console.log("Results saved:", data);
+//         })
+//         .catch(error => {
+//             console.error("Error sending results:", error);
+//         });
+// }
 
 
 
