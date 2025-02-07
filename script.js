@@ -182,10 +182,10 @@ function handle_end_of_paragraph() {
 
     // Prepare the data to be sent in the POST request
     const postData = {
-        email_id: "test@example.com", // Replace with the actual email or make it dynamic
-        type: 1, //  You might want to make these dynamic as well
-        instance: 1, //  You might want to make these dynamic as well
-        keystrokes: results // Use the processed 'results' here
+        email_id: "test@example1.com", // Replace with the actual email or make it dynamic
+        type: 2, //  You might want to make these dynamic as well
+        instance: 2, //  You might want to make these dynamic as well
+        keystrokes: data // Use the processed 'results' here
     };
 
     // Send the POST request using fetch API
@@ -194,7 +194,7 @@ function handle_end_of_paragraph() {
         headers: {
             "Content-Type": "application/json" // Important: Set the content type to JSON
         },
-        body: JSON.stringify(postData) // Convert the data to JSON string
+        body: postData// Convert the data to JSON string
     })
         .then(response => {
             if (!response.ok) {
