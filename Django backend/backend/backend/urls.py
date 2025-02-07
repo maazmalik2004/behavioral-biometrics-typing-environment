@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from backend.views import process_keystrokes
+from backend.views import process_keystrokes, handle_root
 urlpatterns = [
+    path('', handle_root),
     path('admin/', admin.site.urls),
     path('keystroke/',process_keystrokes)
 ]

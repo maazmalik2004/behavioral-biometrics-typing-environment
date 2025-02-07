@@ -6,6 +6,13 @@ import pandas as pd
 import os
 
 @csrf_exempt
+def handle_root(request):
+    return JsonResponse({
+        "success":"true",
+        "message":"welcome to the server"
+    })
+
+@csrf_exempt
 def process_keystrokes(request):
     if request.method != 'POST':
         return JsonResponse({'error': 'Only POST method allowed'}, status=405)
