@@ -13,10 +13,13 @@ def process_keystrokes(request):
     try:
         data = json.loads(request.body)
         email_id = data['email_id']
-        type_id = data['type']
-        instance = data['instance']
+        type_id = data['type']# 1 for answering without looking , 2 for copying 
+        instance = data['instance']#1 ,2 ,3 , ignore it 
         keystrokes = data['keystrokes']
-        
+        age = data['age']
+        sex = data['sex']# male or female donald trump is back 
+        employment_status = data['employment_status'] # employed , unemployed , student 
+        programmer = data['grogrammer'] #true or false 
         # Initialize dictionaries
         keypresses = {}  # For single key press durations
         digraph_delays = {}  # For pairs of keys
@@ -61,7 +64,11 @@ def process_keystrokes(request):
         results = {
             'email_id': email_id,
             'type': type_id,
-            'instance': instance
+            'instance': instance,
+            'age':age,
+            'sex':sex, #= data['sex']# male or female donald trump is back 
+            'employment': employment_status,# = data['employment_status'] # employed , unemployed , student 
+            'programmer':programmer           
         }
         
         # Single key statistics
