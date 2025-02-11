@@ -16,7 +16,7 @@ def process_keystrokes(request):
         type_id = data['type']
         instance = data['instance']
         keystrokes = data['keystrokes']
-        
+            
         # Initialize dictionaries
         keypresses = {}  # For single key press durations
         digraph_delays = {}  # For pairs of keys
