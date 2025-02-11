@@ -120,6 +120,7 @@ function handle_keydown(event) {
             } else {
                 // console.log("reached end of paragraph")
                 typing_area.removeEventListener("keydown", handle_keydown)
+                event.preventDefault();
                 handle_end_of_paragraph()
             }
         }
@@ -162,75 +163,122 @@ function handle_question_submit() {
 
     document.getElementById('progress_typing_container').style.display = 'block';
     document.getElementById('question_container').style.display = 'none';
-    // enter_name_container.style.opacity = "0%"
-    // enter_name_container.style.pointerEvents = "none"
-    // progress_typing_container.style.opacity = "100%"
 
 }
 
 let results = [];
+let thinkingData = []; // Array to store thinking phase keystrokes
+
+let answerInput = document.getElementById("answer_input"); // Get the answer input field
+
+// Listen for keydown event
+answerInput.addEventListener("keydown", event => {
+    const charCode = event.key.charCodeAt(0);
+    if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode === 32) {
+        thinkingData.push({
+            event: "keydown",
+            key: event.key,
+            timestamp: performance.now()
+        });
+    }
+});
+
+// Listen for keyup event
+answerInput.addEventListener("keyup", event => {
+    const charCode = event.key.charCodeAt(0);
+    if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || charCode === 32) {
+        thinkingData.push({
+            event: "keyup",
+            key: event.key,
+            timestamp: performance.now()
+        });
+    }
+});
+
 function handle_end_of_paragraph() {
     console.log("reached end of paragraph");
     thank_you_page.style.opacity = "100%";
     thank_you_page.style.pointerEvents = "auto";
-    console.log(data); //raw unprocessed data
-    results = processEventsWithSlidingWindow(data, 100, 25); //define window size and overlap here
+
+    console.log("Typing Data:", data);
+    console.log("Thinking Data:", thinkingData);
+
+    results = processEventsWithSlidingWindow(data, 100, 25);
     console.log(results);
 
-    // Frontend endpoint to send the processed data
-    const endpoint = "http://localhost:8000/keystroke/"; // Replace with your actual endpoint
+    // Backend endpoint
+    const endpoint = "http://localhost:8000/keystroke/";
 
-    // Prepare the data to be sent in the POST request
-    const postData = {
-        email_id: "test@example1.com", // Replace with the actual email or make it dynamic
-        type: 2, //  You might want to make these dynamic as well
-        instance: 2, //  You might want to make these dynamic as well
-        keystrokes: data // Use the processed 'results' here
+    const email = document.getElementById("email_input").value;
+    const gender = document.getElementById("gender_input").value;
+    const age = document.getElementById("age_input").value;
+    const employed_input = document.getElementById("employed_input").value;
+    const programmer_input = document.getElementById("programmer_input").value;
+
+    // Prepare the data for keystrokes request
+    const keystrokesPostData = {
+        email_id: email,
+        type: 2,
+        instance: 3,
+        keystrokes: data,
+        age: age,
+        gender: gender,
+        employed: employed_input,
+        programmer: programmer_input
     };
 
-    // Send the POST request using fetch API
+    // Prepare the data for thinkingKeystrokes request
+    const thinkingPostData = {
+        email_id: email,
+        type: 2,
+        instance: 3,
+        thinkingKeystrokes: thinkingData, // Separate request for thinking data
+        age: age,
+        gender: gender,
+        employed: employed_input,
+        programmer: programmer_input
+    };
+    console.log("Keystrokes Post Data:", keystrokesPostData);
+    console.log("Thinking Post Data:", thinkingPostData);
+    // First request: Sending keystrokes data
     fetch(endpoint, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json" // Important: Set the content type to JSON
+            "Content-Type": "application/json"
         },
-        body: postData// Convert the data to JSON string
+        body: JSON.stringify(keystrokesPostData)
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Keystrokes Request failed! Status: ${response.status}`);
             }
-            return response.json(); // Or response.text() if the server returns plain text
+            return response.json();
         })
         .then(responseData => {
-            console.log("Success:", responseData); // Handle the successful response from the server
-            // You might want to do something with the response, like displaying a message
+            console.log("Keystrokes Success:", responseData);
+
+            // Second request: Sending thinking keystrokes data after the first request succeeds
+            return fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(thinkingPostData)
+            });
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`ThinkingKeystrokes Request failed! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(responseData => {
+            console.log("ThinkingKeystrokes Success:", responseData);
         })
         .catch(error => {
-            console.error("Error:", error); // Handle errors during the fetch request
-            // You might want to display an error message to the user
+            console.error("Error:", error);
         });
 }
-
-// function sendResultsToServer(results) {
-
-//     console.log("Yo: ", JSON.stringify({ results: results }))
-
-//     fetch("http://localhost:5000/save-results", { //temporary server
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ results: results }),
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log("Results saved:", data);
-//         })
-//         .catch(error => {
-//             console.error("Error sending results:", error);
-//         });
-// }
 
 
 

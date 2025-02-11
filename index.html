@@ -17,38 +17,54 @@
     <div id="enter_name_container" class="enter_name_container">
         <entername>Please fill in the following details</entername>
         <div id="enter_name_child_container">
-            <input type="text" id="name_input" placeholder="Enter your name" />
+            <div class="top_row">
+                <label for="name_input">Name:</label>
+                <input type="text" id="name_input" placeholder="Enter your name" required /><br><br>
 
-            <label for="gender_input">Gender:</label>
-            <select id="gender_input" required>
-                <option value="">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select><br><br>
+                <label for="email_input">Email:</label>
+                <input type="email" id="email_input" placeholder="Enter your email" required /><br><br>
 
-            <label for="employed_input">Employment Status:</label>
-            <select id="employed_input" required>
-                <option value="">Select</option>
-                <option value="employed">Employed</option>
-                <option value="unemployed">Unemployed</option>
-                <option value="student">Student</option>
-                <option value="other">Other</option>
-            </select><br><br>
+                <label for="gender_input">Gender:</label>
+                <select id="gender_input" required>
+                    <option value="">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select><br><br>
+            </div>
 
-            <label for="age_input">Age:</label>
-            <input type="number" id="age_input" placeholder="Enter your age" min="1" required><br><br>
+            <div class="middle_row">
+
+                <label for="employed_input">Employment Status:</label>
+                <select id="employed_input" required>
+                    <option value="">Select</option>
+                    <option value="employed">Employed</option>
+                    <option value="unemployed">Unemployed</option>
+                    <option value="student">Student</option>
+                    <option value="other">Other</option>
+                </select><br><br>
+
+                <label for="age_input">Age:</label>
+                <input type="number" id="age_input" placeholder="Enter your age" min="1" required><br><br>
+
+                <label for="programmer_input">Are you a programmer?</label>
+                <select id="programmer_input" required>
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select><br><br>
+            </div>
 
 
-            <button id="submit_button" onclick="handle_name_submit()">Begin session</button>
         </div>
+        <button id="submit_button" onclick="handle_name_submit()">Begin session</button>
     </div>
 
+
     <div id="question_container" class="enter_name_container" style="display: none;">
-        <entername>Answer the following question:</entername>
         <div id="question_child_container">
             <p id="the_question">What is your favorite color?</p>
-            <input type="text" id="answer_input" placeholder="Enter your answer" required><br><br>
+            <input type="text" id="answer_input" placeholder="Enter your answer" required>
             <button id="submit_question_button" onclick="handle_question_submit()">Submit Answer</button>
         </div>
     </div>

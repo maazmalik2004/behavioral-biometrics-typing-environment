@@ -175,20 +175,28 @@ function processEventsWithSlidingWindow(events, windowSize, slideSize) {
     const results = [];
     let start = 0;
 
-    while (start < events.length) {
-        let end = Math.min(start + windowSize, events.length);
-        let windowEvents = events.slice(start, end);
+    // while (start < events.length) {
+    //     let end = Math.min(start + windowSize, events.length);
+    //     let windowEvents = events.slice(start, end);
 
-        let keyDelaysResult = calculateAndStoreDelays(windowEvents);
-        let interkeyDelaysResult = calculateAndStoreInterkeyDelays(windowEvents);
+    //     let keyDelaysResult = calculateAndStoreDelays(windowEvents);
+    //     let interkeyDelaysResult = calculateAndStoreInterkeyDelays(windowEvents);
 
-        results.push({
-            keyDelays: keyDelaysResult,
-            interkeyDelays: interkeyDelaysResult,
-        });
+    //     results.push({
+    //         keyDelays: keyDelaysResult,
+    //         interkeyDelays: interkeyDelaysResult,
+    //     });
 
-        start += slideSize;
-    }
+    //     start += slideSize;
+    // }
+
+    let keyDelaysResult = calculateAndStoreDelays(events);
+    let interkeyDelaysResult = calculateAndStoreInterkeyDelays(events);
+
+    results.push({
+        keyDelays: keyDelaysResult,
+        interkeyDelays: interkeyDelaysResult,
+    });
 
     return results;
 }
