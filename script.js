@@ -3,11 +3,24 @@ let progress = document.getElementById("progress")
 let typing_area = document.getElementById("typing_area")
 let out_of_focus_warning = document.getElementById("out_of_focus_warning")
 let enter_name_container = document.getElementById("enter_name_container")
-let name_input = document.getElementById("name_input")
 let thank_you_page = document.getElementById("thank_you_page")
 let think_typing_container = document.getElementById("think_typing_container")
 let question = document.getElementById("question")
 let thinking_typing_area = document.getElementById("thinking_typing_area")
+
+let name_input = document.getElementById("name_input")
+let email_input = document.getElementById("email_input")
+let gender_input = document.getElementById("gender_input")
+let employed_input = document.getElementById("employed_input")
+let age_input = document.getElementById("age_input")
+let programmer_input = document.getElementById("programmer_input")
+
+
+if (!name_input || !email_input || !gender_input || !employed_input || !age_input || !programmer_input) {
+    alert("Please fill in all fields before proceeding.");
+    return;
+}
+
 
 const paragraph = "The sun dipped below the horizon, painting the sky in hues of orange and pink, as a gentle breeze rustled through the trees. Birds chirped their evening songs, signaling the close of another day. Children laughed and played in the distance, their joyful voices carrying through the air. A lone cyclist pedaled down the quiet street, the hum of tires on asphalt blending with the sounds of the settling world. The aroma of freshly baked bread wafted from a nearby home, inviting thoughts of warmth and comfort. In that moment, time seemed to slow, offering a brief respite from the rush of life."
 
