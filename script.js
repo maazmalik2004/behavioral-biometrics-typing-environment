@@ -190,7 +190,7 @@ function handle_end_of_paragraph() {
     results = processEventsWithSlidingWindow(data, 100, 25);
 
     // Backend endpoint
-    const endpoint = "http://localhost:8000/keystroke/";
+    const endpoint = "https://flask-backend-biometrics.onrender.com/keystroke";
 
     const email = document.getElementById("email_input").value;
     const gender = document.getElementById("gender_input").value;
@@ -270,7 +270,7 @@ function handle_end_of_paragraph() {
 
 
 
-//we need to use pointer approach... 
+//we need to use pointer approach...
 //if letter typed, move to the next letter if it exists
 //if next letter does not exist, create it using createElement()
 // if letter typed is correct- mark is as green
