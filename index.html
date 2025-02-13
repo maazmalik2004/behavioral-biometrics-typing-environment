@@ -91,16 +91,17 @@
 
     <script>
         function checkDevice() {
-            let isMobile = /Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(navigator.userAgent);
-            let isSmallScreen = window.innerWidth < 1024; // Adjust threshold for tablets
+            let isMobile = /Android|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
+            let isSmallScreen = window.innerWidth < 524; // Adjust threshold for tablets
 
             if (isMobile || isSmallScreen) {
-                document.body.innerHTML = "<h2>This page is only accessible on a laptop or desktop.</h2>";
+                document.body.innerHTML = '<h2 style="color: red; text-align: center; margin-top: 20%;">This page is only accessible on a laptop or desktop.</h2>';
             }
         }
         window.onload = checkDevice;
         window.onresize = checkDevice;
     </script>
+
     <script src="processing.js"></script>
     <script src="script.js"></script>
 </body>
