@@ -133,16 +133,17 @@ typing_area.addEventListener("blur", function () {
 let username = ""
 
 function handle_name_submit() {
-    let name_input = document.getElementById("name_input")
-    let email_input = document.getElementById("email_input")
-    let gender_input = document.getElementById("gender_input")
-    let employed_input = document.getElementById("employed_input")
-    let age_input = document.getElementById("age_input")
-    let programmer_input = document.getElementById("programmer_input")
+    let name_input = document.getElementById("name_input").value;
+    let email_input = document.getElementById("email_input").value;
+    let gender_input = document.getElementById("gender_input").value;
+    let employed_input = document.getElementById("employed_input").value;
+    let age_input = document.getElementById("age_input").value;
+    let programmer_input = document.getElementById("programmer_input").value;
 
 
     if (!name_input || !email_input || !gender_input || !employed_input || !age_input || !programmer_input) {
         alert("Please fill in all fields before proceeding.");
+        return;
     }
     document.getElementById("enter_name_container").style.display = "none";
     document.getElementById('question_container').style.display = 'block';
