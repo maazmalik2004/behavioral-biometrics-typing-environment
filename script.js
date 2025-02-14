@@ -144,6 +144,8 @@ function handle_name_submit() {
     if (!name_input || !email_input || !gender_input || !employed_input || !age_input || !programmer_input) {
         alert("Please fill in all fields before proceeding.");
     }
+    document.getElementById("enter_name_container").style.display = "none";
+    document.getElementById('question_container').style.display = 'block';
 }
 
 function handle_question_submit() {
