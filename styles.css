@@ -447,22 +447,6 @@ entername {
     outline: none;
 }
 
-#profession_input {
-    padding: 1rem;
-    background-color: #f99b033c;
-    border-radius: 0.5rem;
-    border-left: yellow 0.5rem solid;
-    color: white;
-    font-size: 1rem;
-}
-
-#profession_input:focus {
-    outline: none;
-}
-
-#profession_input::placeholder {
-    color: white;
-}
 
 #handedness_input {
     padding: 1rem;

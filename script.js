@@ -155,6 +155,11 @@ function handle_question_submit() {
         alert("Please enter an answer.");
         return;
     }
+    let ans = answerInput.value.trim();
+    if (ans.length < 50) {
+        alert("Your answer must be at least 50 characters long.");
+        return;
+    }
     document.getElementById('progress_typing_container').style.display = 'block';
     document.getElementById('question_container').style.display = 'none';
 
@@ -203,6 +208,7 @@ function handle_end_of_paragraph() {
     const age = document.getElementById("age_input").value;
     const employed_input = document.getElementById("employed_input").value;
     const programmer_input = document.getElementById("programmer_input").value;
+    const handedness = document.getElementById("handedness_input").value;
 
     // Prepare the data for keystrokes request
     const keystrokesPostData = {
@@ -213,7 +219,8 @@ function handle_end_of_paragraph() {
         age: age,
         sex: gender,
         employment_status: employed_input,
-        programmer: programmer_input
+        programmer: programmer_input,
+        handedness: handedness
     };
 
     // Prepare the data for thinkingKeystrokes request
@@ -225,7 +232,8 @@ function handle_end_of_paragraph() {
         age: age,
         sex: gender,
         employment_status: employed_input,
-        programmer: programmer_input
+        programmer: programmer_input,
+        handedness: handedness
     };
     // First request: Sending keystrokes data
     fetch(endpoint, {
