@@ -31,16 +31,23 @@
                     <option value="female">Female</option>
                     <option value="other">Other</option>
                 </select><br><br>
+                <label for="handedness_input">Handedness:</label>
+                <select id="handedness_input" required>
+                    <option value="">Select</option>
+                    <option value="left">Left-Handed</option>
+                    <option value="right">Right-Handed</option>
+                </select><br><br>
             </div>
 
             <div class="middle_row">
-
-                <label for="employed_input">Employment Status:</label>
-                <select id="employed_input" required>
+                <label for="profession_input">Profession:</label>
+                <select id="profession_input" required>
                     <option value="">Select</option>
-                    <option value="employed">Employed</option>
-                    <option value="unemployed">Unemployed</option>
                     <option value="student">Student</option>
+                    <option value="professor">Professor</option>
+                    <option value="programmer">Programmer</option>
+                    <option value="homemaker">Homemaker</option>
+                    <option value="freelancer">Corporate Employee</option>
                     <option value="other">Other</option>
                 </select><br><br>
 
@@ -53,18 +60,17 @@
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select><br><br>
+
+
             </div>
-
-
         </div>
         <button id="submit_button" onclick="handle_name_submit()">Begin session</button>
     </div>
 
-
     <div id="question_container" class="enter_name_container" style="display: none;">
         <div id="question_child_container">
             <p id="the_question">What are your thoughts on the impact of AI in schools and higher education?</p>
-            <input type="text" id="answer_input" placeholder="Enter your answer" required>
+            <input type="text" id="answer_input" placeholder="Enter your answer" required minlength="50">
             <button id="submit_question_button" onclick="handle_question_submit()">Submit Answer</button>
         </div>
     </div>
@@ -88,11 +94,10 @@
         <closepage> You can close this page now</closepage>
     </div>
 
-
     <script>
         function checkDevice() {
             let isMobile = /Android|iPhone|iPod|BlackBerry/i.test(navigator.userAgent);
-            let isSmallScreen = window.innerWidth < 524; // Adjust threshold for tablets
+            let isSmallScreen = window.innerWidth < 524;
 
             if (isMobile || isSmallScreen) {
                 document.body.innerHTML = '<h2 style="color: red; text-align: center; margin-top: 20%;">This page is only accessible on a laptop or desktop.</h2>';

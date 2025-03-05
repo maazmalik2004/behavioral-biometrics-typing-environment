@@ -268,14 +268,6 @@ function handle_end_of_paragraph() {
 
 
 
-
-
-
-
-
-
-
-
 //we need to use pointer approach...
 //if letter typed, move to the next letter if it exists
 //if next letter does not exist, create it using createElement()
